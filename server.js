@@ -2,7 +2,7 @@
 const express = require('express');
 const session = require('express-session');
 const axios = require('axios');
-const { authorizationUrl, getAccessToken, getProducts, createProduct, updateProduct, deleteProduct } = require('./oauth');
+const { authorizationUrl, getAccessToken, getProducts, createProduct } = require('./oauth');
 
 const app = express();
 app.use(express.json());
@@ -94,36 +94,6 @@ app.post('/products', async (req, res) => {
       console.error('Detalhes do erro:', JSON.stringify(error.response.data, null, 2));
     }
     res.status(500).send('Erro ao criar produto');
-  }
-});
-
-app.put('/products/:id', async (req, res) => {
-  const accessToken = req.session.accessToken;
-  const productId = req.params.id;
-  const productData = req.body;
-  if (!accessToken) {
-    return res.status(400).send('Access token is missing');
-  }
-
-  try {
-    const updatedProduct = await updateProduct(accessToken, productId, productData);
-    res.json(updatedProduct);
-  } catch (error) {
-    res.status(500).send('Error updating product');
-  }
-});
-
-app.delete('/products/:id', async (req, res) => {
-  const accessToken = req.session.accessToken;
-  const productId = req.params.id;
-  if (!accessToken) {
-    return res.status(400).send('Access token is missing');
-  }
-  try {
-    await deleteProduct(accessToken, productId);
-    res.status(204).send();
-  } catch (error) {
-    res.status(500).send('Error deleting product');
   }
 });
 

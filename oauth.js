@@ -87,51 +87,9 @@ const createProduct = async (accessToken, productData) => {
   }
 };
 
-const updateProduct = async (accessToken, productId, productData) => {
-  try {
-    const response = await axios.put(`https://www.bling.com.br/Api/v3/produtos/${productId}`, { produto: productData }, {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    });
-
-    console.log('API Response:', JSON.stringify(response.data, null, 2));
-
-    if (response.data && response.data.retorno && response.data.retorno.produto) {
-      return response.data.retorno.produto;
-    } else {
-      throw new Error('Unexpected response structure');
-    }
-  } catch (error) {
-    console.error('Error updating product:', error.message);
-    throw error;
-  }
-};
-
-const deleteProduct = async (accessToken, productId) => {
-  try {
-    await axios.delete(`https://www.bling.com.br/Api/v3/produtos/${productId}`, {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Accept': 'application/json'
-      }
-    });
-
-    console.log('API Response:', JSON.stringify(response.data, null, 2));
-
-  } catch (error) {
-    console.error('Error deleting product:', error.message);
-    throw error;
-  }
-};
-
 module.exports = {
   authorizationUrl,
   getAccessToken,
   getProducts,
   createProduct,
-  updateProduct,
-  deleteProduct
 };
