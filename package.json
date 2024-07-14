@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "axios": "^1.7.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "oauth": "^0.10.0",
+    "oauth2-client": "^0.0.4",
+    "oauth2-client-js": "^0.0.15"
+  }
+}
