@@ -35,8 +35,8 @@ No caso de querer testar seu próprio usuário, altere o clientId e clientSecret
 
 <h3> Imagens funcionamento📌</h3>
 
-<img src="images\omageLogin.jpeg" width="400px;" alt=""/>
-<img src="images\ImageProduct" width="400px;" alt=""/>
+<img src="imagens/imageLogin.png" width="400px;" alt=""/>
+<img src="imagens/imageProduct.png" width="400px;" alt=""/>
 
 
 
