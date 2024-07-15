@@ -1,4 +1,3 @@
-// oauth.js
 const axios = require('axios');
 const querystring = require('querystring');
 
@@ -59,33 +58,25 @@ const getProducts = async (accessToken) => {
 };
 
 const createProduct = async (accessToken, productData) => {
-  try {
-    const response = await axios.post('https://bling.com.br/Api/v3/produtos', { produto: productData }, {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    });
-
-    console.log('API Response:', JSON.stringify(response.data, null, 2));
-
-    if (response.data && response.data.retorno && response.data.retorno.erros) {
-      throw new Error(`Erro ao criar produto: ${response.data.retorno.erros[0].erro.msg}`);
-    } else if (response.data && response.data.retorno && response.data.retorno.produto) {
-      return response.data.retorno.produto;
-    } else {
-      throw new Error('Resposta inesperada da API ao criar produto');
+  const response = await axios.post('https://bling.com.br/Api/v3/produtos', {...productData }, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
     }
-  } catch (error) {
-    if (error.response) {
-      console.error('Erro de validação ao criar produto:', JSON.stringify(error.response.data, null, 2));
-    } else {
-      console.error('Erro ao criar produto:', error.message);
-    }
-    throw error;
+  });
+
+  console.log('API Response:', JSON.stringify(response.data, null, 2));
+
+  if (response.data && response.data.retorno && response.data.retorno.erros) {
+    return `Erro ao criar produto: ${response.data.retorno.erros[0].erro.msg}`;
+  } else if (response.data && response.data.retorno && response.data.retorno.produto) {
+    return response.data.retorno.produto;
+  } else {
+    return 'Resposta inesperada da API ao criar produto';
   }
 };
+
 
 module.exports = {
   authorizationUrl,

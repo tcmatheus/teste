@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const session = require('express-session');
 const axios = require('axios');
@@ -37,6 +36,7 @@ app.get('/callback', async (req, res) => {
   }
 });
 
+// Mostra produtos
 app.get('/products', async (req, res) => {
   const accessToken = req.session.accessToken;
   if (!accessToken) {
@@ -52,6 +52,7 @@ app.get('/products', async (req, res) => {
   }
 });
 
+//Cria produtos
 app.post('/products', async (req, res) => {
   console.log('Dados do produto recebidos:', req.body);
 
@@ -62,7 +63,6 @@ app.post('/products', async (req, res) => {
     return res.status(400).send('Token de acesso ausente');
   }
 
-  // Ensure correct field mapping
   const validTipos = ["P", "S", "N"];
   const validFormatos = ["E", "V", "S"];
 
@@ -76,7 +76,7 @@ app.post('/products', async (req, res) => {
 
   const productData = {
     nome, 
-    preco: parseFloat(preco),
+    preco,
     codigo,
     tipo,
     situacao,
@@ -85,17 +85,10 @@ app.post('/products', async (req, res) => {
 
   console.log('Dados do produto enviados à API:', productData);
 
-  try {
-    const newProduct = await createProduct(accessToken, productData);
-    res.status(201).json(newProduct);
-  } catch (error) {
-    console.error('Erro ao criar produto:', error.message);
-    if (error.response) {
-      console.error('Detalhes do erro:', JSON.stringify(error.response.data, null, 2));
-    }
-    res.status(500).send('Erro ao criar produto');
-  }
+  const newProduct = await createProduct(accessToken, productData);
+  res.status(201).json(newProduct);
 });
+
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
