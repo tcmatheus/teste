@@ -1,9 +1,9 @@
 const axios = require('axios');
 const querystring = require('querystring');
 
-const clientId = '163a02684273d263746613152d11a5ef513e5dd8';
-const clientSecret = 'b96291446dcd1a46a73adb032bf0f9d27f6f9496fb9fc431fd7d90c4fb95';
-const redirectUri = 'http://localhost:3000/callback';
+const clientId = 'SEU_CLIENT_ID';
+const clientSecret = 'SEU_CLIENT_SECRET';
+const redirectUri = 'SEU_CALLBACK';
 const authorizationUrl = `https://www.bling.com.br/Api/v3/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&state=12`;
 
 const getAccessToken = async (authorizationCode) => {
