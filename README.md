@@ -24,11 +24,7 @@ Um texto indicando a rota do projeto será mostrado no console log, sendo localh
 <h3>Usuários📌</h3>
 Para testar o aplicativo, vá para a rota http://localhost:3000/authorize e faça o login com o usuário:
 
- ```bash
-matheustcampos1904@gmail.com
-senha: 33022436Fha@
-   ```
-No caso de querer testar seu próprio usuário, altere o clientId e clientSecret cadastrados no Bling API.
+altere o clientId e clientSecret cadastrados no Bling API.
 
 
 --------------------
